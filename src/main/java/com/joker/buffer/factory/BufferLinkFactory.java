@@ -22,6 +22,7 @@ public class BufferLinkFactory {
 	
 	private static BufferSet bufferSet;
 	private static Strategy strategy;
+	private static boolean inited = false;
 	
 	/**
 	 * 初始化函数
@@ -30,6 +31,8 @@ public class BufferLinkFactory {
 	 * {@link https://github.com/Jokerblazes/jokerBuffer.git}
 	 */
 	public static void initBufferList(int size,int limit,Class strategyClass) {
+		if (inited == true) 
+			return;
 		logger.info("初始化化大小为 {}，限制读限制大小 {}",size,limit);
 		//读取XML文件
 		//1:读取缓冲区类型数
@@ -51,6 +54,7 @@ public class BufferLinkFactory {
 			}
 		else 
 			throw new RuntimeException("未继承Strategy类！");
+		inited = true;
 	}
 
 	/**
