@@ -1,19 +1,21 @@
 package com.joker.buffer.entity;
 
-import java.util.concurrent.atomic.AtomicReference;
 
 
 public class BufferHead {
 	private String databaseName;
 	private int bufferSize;
 	private int currentPosition;
-	protected AtomicReference<BufferState> commandState = new AtomicReference<BufferState>(BufferState.AVE);
+//	protected AtomicReference<BufferState> commandState = new AtomicReference<BufferState>(BufferState.AVE);
 	private BufferState flag;
 	private int bForw;
 	private int bBack;
 	private int avForw;
 	private int avBack;
 	
+	public BufferHead() {
+		flag = BufferState.AVE;
+	}
 	public int getCurrentPosition() {
 		return currentPosition;
 	}
@@ -77,8 +79,13 @@ public class BufferHead {
 	public void setAvBack(int avBack) {
 		this.avBack = avBack;
 	}
+	
+//	public void setState(BufferState state) {
+//		this.commandState.set(state);
+//	}
 
 	enum BufferState {
-		BUSY,AVE,DELWR,WRITE,READ,WAIT
+//		BUSY,AVE,DELWR,WRITE,READ,WAIT
+		FULL,AVE
 	}
 }

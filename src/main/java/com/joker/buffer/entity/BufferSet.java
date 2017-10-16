@@ -12,6 +12,7 @@ public class BufferSet {
 	public BufferSet(int bufferLength,int limit) {
 		this(bufferLength, limit, 5);
 	}
+	
 	public BufferSet(int bufferLength,int limit,int bufferSize) {
 		this.limit = limit;
 		freeBuffers = new Vector<Buffer>();
@@ -37,6 +38,28 @@ public class BufferSet {
 	}
 	public void setFreeBuffers(List<Buffer> freeBuffers) {
 		this.freeBuffers = freeBuffers;
+	}
+	
+	public synchronized void addBufferToBusy(Buffer buffer) {
+		this.busyBuffers.add(buffer);
+	}
+	
+	public synchronized Buffer getBufferFromFree() {
+		return this.freeBuffers.get(0);
+	}
+	
+	public synchronized void removeBufferFromFree() {
+		this.freeBuffers.remove(0);
+	}
+	
+	public synchronized void removeBusyList(List<Buffer> buffers) {
+		this.busyBuffers.removeAll(buffers);
+	}
+	
+	
+	public synchronized void addBufferToFree(Buffer buffer) {
+//		System.out.println("this buffer:"+buffer);
+		this.freeBuffers.add(buffer);
 	}
 	
 	public String testSize() {

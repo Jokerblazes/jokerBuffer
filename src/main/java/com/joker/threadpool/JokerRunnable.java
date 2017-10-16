@@ -13,15 +13,17 @@ public class JokerRunnable implements Runnable {
 	public void run() {
 		Object[] objects = buffer.getBufferObject();
 		final int position = buffer.getPosition();
+//		System.out.println("Buffer:"+buffer);
 //		for (Object o : objects) 
 //			System.out.println("插入数据库：" + o);
-		
+//		System.out.println("position:"+position);
 		for (int i = 0 ; i < position ;i ++) {
 			Object o = objects[i];
 			System.out.println("插入数据库：" + o);
-			BufferLinkFactory3.busyListToFreeList(buffer,typeCode);
 //			BufferLinkFactory2.busyListToFreeList(buffer,typeCode);
 		}
+		buffer.initBuffer();
+		BufferLinkFactory3.busyListToFreeList(buffer,typeCode);
 		
 	}
 	

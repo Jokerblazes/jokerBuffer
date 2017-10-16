@@ -15,6 +15,7 @@ public abstract class Strategy {
 			return false;
 		List<Buffer> freeList = set.getFreeBuffers();
 		final int limit = set.getLimit();
+//		System.out.println("size:"+set.getFreeBuffers().size() +":limit:"+limit);
 		// 2:判断是否还存在空闲的此类型缓冲区
 		if (freeList.size() < limit) {
 			return false;

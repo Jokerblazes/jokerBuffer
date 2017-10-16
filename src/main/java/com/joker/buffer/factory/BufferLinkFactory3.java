@@ -1,16 +1,12 @@
 package com.joker.buffer.factory;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.joker.buffer.elimination.NeedsElimination;
-import com.joker.buffer.elimination.SimpleElimination;
 import com.joker.buffer.elimination.Strategy;
 import com.joker.buffer.entity.Buffer;
 import com.joker.buffer.entity.BufferSet;
-import com.joker.threadpool.JokerExecutor;
-import com.joker.threadpool.JokerRunnable;
 
 public class BufferLinkFactory3 {
 	private static Map<Integer,BufferSet> map = new ConcurrentHashMap<>();
@@ -28,15 +24,18 @@ public class BufferLinkFactory3 {
 		 * 编号0：缓冲区个数为10 限定值为3 每个缓冲区大小为1
 		 * 编号1:缓冲区个数20 限定值为5 每个缓冲区大小为1
 		 */
-		map.put(0, new BufferSet(5,2));
+		map.put(0, new BufferSet(5,1));
 		map.put(1, new BufferSet(20,5));
-		strategy = new SimpleElimination();
-//		strategy = new NeedsElimination();
+//		strategy = new SimpleElimination();
+		strategy = new NeedsElimination();
 	}
 
 	public static Buffer freeListToBusyList(int typeCode) {
+//		System.out.println(typeCode);
 		// 1:先判断先要获取的缓冲区类型
 		BufferSet set = map.get(typeCode);
+//		System.out.println("set:"+set);
+//		System.out.println("isEnough:"+!strategy.isEnoughBuffer(set));
 		if (!strategy.isEnoughBuffer(set)) {
 			strategy.elimination(set,typeCode);
 		}
@@ -44,15 +43,14 @@ public class BufferLinkFactory3 {
 	}
 
 	public static void readObject(Object msg,int typeCode) {
-		System.out.println("read---before"+ map.get(typeCode).testSize());
+//		System.out.println("read---before"+ map.get(typeCode).testSize());
 		Buffer buffer = freeListToBusyList(typeCode);
-		System.out.println("read---after"+ map.get(typeCode).testSize());
+//		System.out.println("read---after"+ map.get(typeCode).testSize());
 		buffer.addBufferObjects(msg);
 	}
 
 	public static void busyListToFreeList(Buffer buffer,int typeCode) {
-		System.out.println("busyListToFreeList:" + map.get(typeCode).testSize());
-		map.get(typeCode).getFreeBuffers().add(buffer);
+		map.get(typeCode).addBufferToFree(buffer);
 	}
 
 }

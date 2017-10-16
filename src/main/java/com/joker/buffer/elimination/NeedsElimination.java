@@ -8,15 +8,24 @@ import com.joker.buffer.entity.BufferSet;
 import com.joker.threadpool.JokerExecutor;
 import com.joker.threadpool.JokerRunnable;
 
+/**
+ * LRU淘汰策略
+ * @author joker
+ *
+ */
 public class NeedsElimination extends Strategy {
 
 	@Override
 	public Buffer assignBuffer(BufferSet set) {
-		List<Buffer> busyList = set.getBusyBuffers();
-		List<Buffer> freeList = set.getFreeBuffers();
-		final Buffer buffer = freeList.get(0);
-		busyList.add(buffer);
-		freeList.remove(0);
+//		List<Buffer> busyList = set.getBusyBuffers();
+//		List<Buffer> freeList = set.getFreeBuffers();
+		final Buffer buffer = set.getBufferFromFree();
+		if (buffer.isFull()) {
+			set.addBufferToBusy(buffer);
+			set.removeBufferFromFree();
+		}
+//		busyList.add(buffer);
+//		freeList.remove(0);
 		return buffer;
 	}
 

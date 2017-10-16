@@ -1,6 +1,6 @@
 package com.joker.threadpool;
 
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ public class JokerExecutor {
 	public static JokerExecutor getInstance() {
 		return executor;
 	}
-	private ThreadPoolExecutor pool = new ThreadPoolExecutor(5, 5, 5, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
+	private ThreadPoolExecutor pool = new ThreadPoolExecutor(10, 20,20 , TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
 	
 	public void execute(Runnable runnable) {
 		pool.execute(runnable);

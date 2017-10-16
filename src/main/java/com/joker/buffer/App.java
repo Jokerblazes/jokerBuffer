@@ -27,8 +27,12 @@ public class App {
 //			String obj = "i:" + i;
 //			BufferLinkFactory2.readObject(obj,0);
 //		}
-		
-		for(int i = 0 ; i < 5 ; i++) {
+//		BufferLinkFactory3.readObject("i1",0);
+//		BufferLinkFactory3.readObject("i2",0);
+//		BufferLinkFactory3.readObject("i3",0);
+//		BufferLinkFactory3.readObject("i4",0);
+//		BufferLinkFactory3.readObject("i5",0);
+		for(int i = 0 ; i < 80 ; i++) {
 			String obj = "i:" + i;
 			BufferLinkFactory3.readObject(obj,0);
 		}
