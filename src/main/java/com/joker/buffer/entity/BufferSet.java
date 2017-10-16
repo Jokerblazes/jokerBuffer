@@ -62,9 +62,6 @@ public class BufferSet {
 		this.freeBuffers.add(buffer);
 	}
 	
-	public String testSize() {
-		return "--busyList.size--" + busyBuffers.size() + "--freeList.size--" + freeBuffers.size();
-	}
 	
 //	public int size() {
 //		return buffers.size();

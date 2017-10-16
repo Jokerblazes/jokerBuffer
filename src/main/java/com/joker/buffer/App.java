@@ -1,10 +1,6 @@
 package com.joker.buffer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.joker.buffer.entity.Buffer;
-import com.joker.buffer.factory.BufferLinkFactory2;
+import com.joker.buffer.elimination.SimpleElimination;
 import com.joker.buffer.factory.BufferLinkFactory;
 
 /**
@@ -14,7 +10,7 @@ import com.joker.buffer.factory.BufferLinkFactory;
 public class App {
 	public static void main(String[] args) {
 //		BufferLinkFactory2.initBufferList();
-		BufferLinkFactory.initBufferList();
+		BufferLinkFactory.initBufferList(5,1,SimpleElimination.class);
 //		ThreadPoolExecutor pool = new ThreadPoolExecutor(5, 5, 5, TimeUnit.DAYS, new SynchronousQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
 //		Runnable runnable = new Runnable() {
 //			public void run() {

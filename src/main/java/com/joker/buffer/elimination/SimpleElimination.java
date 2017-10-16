@@ -2,6 +2,9 @@ package com.joker.buffer.elimination;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.joker.buffer.entity.Buffer;
 import com.joker.buffer.entity.BufferSet;
 import com.joker.threadpool.JokerExecutor;
@@ -13,54 +16,35 @@ import com.joker.threadpool.JokerRunnable;
  *
  */
 public class SimpleElimination extends Strategy{
-
+	private final static Logger logger = LoggerFactory.getLogger(SimpleElimination.class);
 	@Override
-	public void elimination(BufferSet set,int typeCode) {
+	public void elimination(BufferSet set) {
 		List<Buffer> busyList = set.getBusyBuffers();
+		logger.info("当前繁忙缓冲区 {}",busyList);
 		// 2:判断是否还存在空闲的此类型缓冲区
 		JokerExecutor executor = JokerExecutor.getInstance();
 		busyList.forEach(buffer -> {
-//			System.out.println(buffer);
-			JokerRunnable runnable = new JokerRunnable(buffer,typeCode);
+			JokerRunnable runnable = new JokerRunnable(buffer);
 			executor.execute(runnable);
 		});
+		logger.info("等待所有子线程任务完成！");
 		executor.awaitTermination();
 		set.removeBusyList(busyList);
-//		System.out.println(set.testSize());
-//		busyList.removeAll(busyList);
+		logger.info("移除所有繁忙缓冲区！");
 	}
 
 	@Override
 	public Buffer assignBuffer(BufferSet set) {
-//		List<Buffer> busyList = set.getBusyBuffers();
-//		List<Buffer> freeList = set.getFreeBuffers();
 		final Buffer buffer = set.getBufferFromFree();
-//		System.out.println(buffer);
-		
+		logger.info("获得空闲缓冲区 {}",buffer);
 		if (buffer.isFull()) {
-//			System.out.println("befire:"+set.testSize());
 			set.addBufferToBusy(buffer);
 			set.removeBufferFromFree();
-//			busyList.add(buffer);
-//			freeList.remove(0);
-//			System.out.println("after:"+set.testSize());
+			logger.info("空闲缓冲区 {}移入繁忙区",buffer);
 		}
 		return buffer;
 	}
 
-//	@Override
-//	public boolean isEnoughBuffer(BufferSet set) {
-//		if (set == null) 
-//			//抛异常
-//			return false;
-//		List<Buffer> freeList = set.getFreeBuffers();
-//		final int limit = set.getLimit();
-//		// 2:判断是否还存在空闲的此类型缓冲区
-//		if (freeList.size() < limit) {
-//			return false;
-//		}
-//		return true;
-//	}
 	
 	
 
