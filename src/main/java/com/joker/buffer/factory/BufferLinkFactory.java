@@ -75,7 +75,7 @@ public class BufferLinkFactory {
 	 * @author joker
 	 * {@link https://github.com/Jokerblazes/jokerBuffer.git}
 	 */
-	public static void readObject(Object msg,int typeCode) {
+	public static void readObject(Object msg) {
 		Buffer buffer = freeListToBusyList();
 		buffer.addBufferObjects(msg);
 	}

@@ -12,7 +12,7 @@ import com.joker.threadpool.JokerExecutor;
 import com.joker.threadpool.JokerRunnable;
 
 /**
- * LRU淘汰策略
+ * 淘汰策略--缓写策略
  * @author joker
  *
  */
