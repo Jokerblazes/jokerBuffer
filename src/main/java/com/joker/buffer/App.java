@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.joker.buffer.entity.Buffer;
 import com.joker.buffer.factory.BufferLinkFactory2;
-import com.joker.buffer.factory.BufferLinkFactory3;
+import com.joker.buffer.factory.BufferLinkFactory;
 
 /**
  * Hello world!
@@ -14,7 +14,7 @@ import com.joker.buffer.factory.BufferLinkFactory3;
 public class App {
 	public static void main(String[] args) {
 //		BufferLinkFactory2.initBufferList();
-		BufferLinkFactory3.initBufferList();
+		BufferLinkFactory.initBufferList();
 //		ThreadPoolExecutor pool = new ThreadPoolExecutor(5, 5, 5, TimeUnit.DAYS, new SynchronousQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
 //		Runnable runnable = new Runnable() {
 //			public void run() {
@@ -34,7 +34,7 @@ public class App {
 //		BufferLinkFactory3.readObject("i5",0);
 		for(int i = 0 ; i < 80 ; i++) {
 			String obj = "i:" + i;
-			BufferLinkFactory3.readObject(obj,0);
+			BufferLinkFactory.readObject(obj,0);
 		}
 		
 //		Buffer b = BufferLinkFactory.freeListToBusyList();

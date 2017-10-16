@@ -1,7 +1,7 @@
 package com.joker.threadpool;
 
 import com.joker.buffer.entity.Buffer;
-import com.joker.buffer.factory.BufferLinkFactory3;
+import com.joker.buffer.factory.BufferLinkFactory;
 
 public class JokerRunnable implements Runnable {
 	private Buffer buffer;
@@ -23,7 +23,7 @@ public class JokerRunnable implements Runnable {
 //			BufferLinkFactory2.busyListToFreeList(buffer,typeCode);
 		}
 		buffer.initBuffer();
-		BufferLinkFactory3.busyListToFreeList(buffer,typeCode);
+		BufferLinkFactory.busyListToFreeList(buffer,typeCode);
 		
 	}
 	
