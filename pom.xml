@@ -9,6 +9,68 @@
 
   <name>JokerBuffer</name>
   <url>http://maven.apache.org</url>
+ <!--  <build>
+		<plugins>
+
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.1</version>
+			<configuration>
+				<source>1.7</source>
+				<target>1.7</target>
+				<compilerId>eclipse</compilerId>
+			</configuration>
+			<dependencies>
+				<dependency>
+					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-compiler-eclipse</artifactId>
+					<version>2.2</version>
+				</dependency>
+			</dependencies>
+		</plugin>
+		
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+                <execution>
+                    <id>attach-sources</id>
+                    <goals>
+                        <goal>jar</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+		</plugins>
+
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.9</version>
+			</extension>
+		</extensions>
+	</build>
+<distributionManagement>
+	<repository>
+		<id>JokerBuffer</id>
+		<url>file:/Users/joker/Desktop/maven-project/</url>
+	</repository>
+</distributionManagement> -->
 <repositories>
 	<repository>
 		<id>Jokerblazes-support</id>
